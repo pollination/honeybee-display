@@ -1,0 +1,13 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: pytest
+  - dependency-name: setuptools
+  - dependency-name: twine
+  - dependency-name: wheel
+  - dependency-name: honeybee-display
