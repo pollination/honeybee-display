@@ -1,4 +1,4 @@
-from pollination.honeybee_display.edit import ModelToVis
+from pollination.honeybee_display.translate import ModelToVis
 from queenbee.plugin.function import Function
 
 
