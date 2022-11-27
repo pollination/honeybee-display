@@ -69,8 +69,9 @@ class ModelToVis(Function):
             '--grid-data {{self.grid_data}} ' \
             '--grid-display-mode {{self.grid_display_mode}} ' \
             '--output-format {{self.output_format}} ' \
-            '--output-file model_vis.vtkjs'
+            '--output-file model_vis.{{self.output_format}}'
 
-    new_model = Outputs.file(
-        description='Output visualization file.', path='model.{{self.output_format}}'
+    output_file = Outputs.file(
+        description='Output visualization file.',
+        path='model_vis.{{self.output_format}}'
     )
