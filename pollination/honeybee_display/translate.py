@@ -26,19 +26,19 @@ class ModelToVis(Function):
         spec={'type': 'string', 'enum': ['type', 'boundary_condition', 'none']}
     )
 
-    wireframe = Inputs.str(
-        description='A switch to note whether a ContextGeometry dedicated to the '
-        'Model Wireframe (in DisplayLineSegment3D) should be included in the '
-        'output VisualizationSet.', default='wireframe',
-        spec={'type': 'string', 'enum': ['wireframe', 'exclude-wireframe']}
-    )
-
-    color_by_visibility = Inputs.str(
+    color_visibility = Inputs.str(
         description='A switch to note whether the color-by geometry should be hidden '
         'or shown by default. Hiding the color-by geometry is useful when the primary '
         'purpose of the visualization is to display grid data or room/face attributes '
         'but it is still desirable to have the option to turn on the geometry.',
         default='hide', spec={'type': 'string', 'enum': ['hide', 'show']}
+    )
+
+    wireframe = Inputs.str(
+        description='A switch to note whether a ContextGeometry dedicated to the '
+        'Model Wireframe (in DisplayLineSegment3D) should be included in the '
+        'output VisualizationSet.', default='wireframe',
+        spec={'type': 'string', 'enum': ['wireframe', 'exclude-wireframe']}
     )
 
     room_attr = Inputs.str(
@@ -97,7 +97,9 @@ class ModelToVis(Function):
     @command
     def model_modifiers_from_constructions(self):
         return 'honeybee-display model-to-vis model.hbjson ' \
-            '--color-by {{self.color_by}} --{{self.wireframe}} ' \
+            '--color-by {{self.color_by}} --{{self.color_visibility}}-color-by ' \
+            '--{{self.wireframe}} --{{self.attr_format}}-attr ' \
+            '--room-attr {{self.room_attr}} --face-attr {{self.room_attr}}' \
             '--grid-data {{self.grid_data}} ' \
             '--grid-display-mode {{self.grid_display_mode}} ' \
             '--output-format {{self.output_format}} ' \
