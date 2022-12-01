@@ -33,6 +33,37 @@ class ModelToVis(Function):
         spec={'type': 'string', 'enum': ['wireframe', 'exclude-wireframe']}
     )
 
+    color_by_visibility = Inputs.str(
+        description='A switch to note whether the color-by geometry should be hidden '
+        'or shown by default. Hiding the color-by geometry is useful when the primary '
+        'purpose of the visualization is to display grid data or room/face attributes '
+        'but it is still desirable to have the option to turn on the geometry.',
+        default='hide', spec={'type': 'string', 'enum': ['hide', 'show']}
+    )
+
+    room_attr = Inputs.str(
+        description='An optional text string of an attribute that the Model '
+        'Rooms have (eg. display_name), which will be used to construct a '
+        'visualization of this attribute in the resulting VisualizationSet. '
+        'Room attributes input here can have . that separates the nested attributes '
+        'from one another. For example, properties.energy.program_type.', default=''
+    )
+
+    face_attr = Inputs.str(
+        description='An optional text string of an attribute that the Model '
+        'Faces have (eg. display_name), which will be used to construct a '
+        'visualization of this attribute in the resulting VisualizationSet. '
+        'Face attributes input here can have . that separates the nested attributes '
+        'from one another. For example, properties.energy.construction.', default=''
+    )
+
+    attr_format = Inputs.str(
+        description='A switch to note whether to note whether the input room-attr '
+        'and face-attr should be expressed as a colored AnalysisGeometry '
+        'or a ContextGeometry as text labels.', default='text',
+        spec={'type': 'string', 'enum': ['text', 'color']}
+    )
+
     grid_data = Inputs.folder(
         description='An optional path to a folder containing data that '
         'aligns with the SensorGrids in the model. Any sub folder within this path '
