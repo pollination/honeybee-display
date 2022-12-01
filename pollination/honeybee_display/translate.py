@@ -99,7 +99,7 @@ class ModelToVis(Function):
         return 'honeybee-display model-to-vis model.hbjson ' \
             '--color-by {{self.color_by}} --{{self.color_visibility}}-color-by ' \
             '--{{self.wireframe}} --{{self.attr_format}}-attr ' \
-            '--room-attr {{self.room_attr}} --face-attr {{self.room_attr}}' \
+            '--room-attr "{{self.room_attr}}" --face-attr "{{self.face_attr}}" ' \
             '--grid-data {{self.grid_data}} ' \
             '--grid-display-mode {{self.grid_display_mode}} ' \
             '--output-format {{self.output_format}} ' \
