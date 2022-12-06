@@ -64,6 +64,23 @@ class ModelToVis(Function):
         spec={'type': 'string', 'enum': ['text', 'color']}
     )
 
+    grid_display_mode = Inputs.str(
+        description='Text that dictates how the ContextGeometry for Model SensorGrids '
+        'should display in the resulting visualization. The Default option '
+        'will draw sensor points whenever there is no grid_data_path and will not '
+        'draw them at all when grid data is provided, assuming the AnalysisGeometry of '
+        'the grids is sufficient. Choose from: Default, Points, Wireframe, Surface, '
+        'SurfaceWithEdges, None.', default='Default',
+        spec={'type': 'string', 'enum': ['Default', 'Points', 'Wireframe' 'Surface',
+                                         'SurfaceWithEdges', 'None']}
+    )
+
+    grid_visibility = Inputs.str(
+        description='A switch to note whether the SensorGrid ContextGeometry should '
+        'be hidden or shown by default.',
+        default='hide', spec={'type': 'string', 'enum': ['hide', 'show']}
+    )
+
     grid_data = Inputs.folder(
         description='An optional path to a folder containing data that '
         'aligns with the SensorGrids in the model. Any sub folder within this path '
@@ -78,7 +95,7 @@ class ModelToVis(Function):
         path='input_data', optional=True
     )
 
-    grid_display_mode = Inputs.str(
+    grid_data_display_mode = Inputs.str(
         description='Text to set the display_mode of the AnalysisGeometry that is '
         'generated from the grid_data_path above. Note that this has no effect if '
         'there are no meshes associated with the model SensorGrids. Choose from: '
@@ -100,8 +117,9 @@ class ModelToVis(Function):
             '--color-by {{self.color_by}} --{{self.color_visibility}}-color-by ' \
             '--{{self.wireframe}} --{{self.attr_format}}-attr ' \
             '--room-attr "{{self.room_attr}}" --face-attr "{{self.face_attr}}" ' \
-            '--grid-data {{self.grid_data}} ' \
             '--grid-display-mode {{self.grid_display_mode}} ' \
+            '--{{self.grid_visibility}}-grid --grid-data input_data ' \
+            '--grid-data-display-mode {{self.grid_data_display_mode}} ' \
             '--output-format {{self.output_format}} ' \
             '--output-file model_vis.{{self.output_format}}'
 
