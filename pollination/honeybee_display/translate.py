@@ -106,9 +106,9 @@ class ModelToVis(Function):
 
     output_format = Inputs.str(
         description='Text for the output format of the resulting VisualizationSet '
-        'File (.vsf). Choose from: vsf, pkl, vtkjs. Note that vsf refers to the '
+        'File (.vsf). Choose from: vsf, pkl, vtkjs, html. Note that vsf refers to the '
         'JSON version of the VisualizationSet File.', default='vsf',
-        spec={'type': 'string', 'enum': ['vsf', 'json', 'pkl', 'vtkjs']}
+        spec={'type': 'string', 'enum': ['vsf', 'json', 'pkl', 'vtkjs', 'html']}
     )
 
     @command
