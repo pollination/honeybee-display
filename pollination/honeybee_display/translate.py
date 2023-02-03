@@ -104,6 +104,13 @@ class ModelToVis(Function):
               'enum': ['Surface', 'SurfaceWithEdges', 'Wireframe', 'Points']}
     )
 
+    active_grid_data = Inputs.str(
+        description='Optional text to specify the active data in the '
+        'AnalysisGeometry. This should match the name of the sub-folder '
+        'within the grid_data_path that should be active. If unspecified, the '
+        'first data set in the grid_data_path with be active.', default=''
+    )
+
     output_format = Inputs.str(
         description='Text for the output format of the resulting VisualizationSet '
         'File (.vsf). Choose from: vsf, pkl, vtkjs, html. Note that vsf refers to the '
@@ -112,7 +119,7 @@ class ModelToVis(Function):
     )
 
     @command
-    def model_modifiers_from_constructions(self):
+    def translate_model_to_vis(self):
         return 'honeybee-display model-to-vis model.hbjson ' \
             '--color-by {{self.color_by}} --{{self.color_visibility}}-color-by ' \
             '--{{self.wireframe}} --{{self.attr_format}}-attr ' \
@@ -120,6 +127,7 @@ class ModelToVis(Function):
             '--grid-display-mode {{self.grid_display_mode}} ' \
             '--{{self.grid_visibility}}-grid --grid-data input_data ' \
             '--grid-data-display-mode {{self.grid_data_display_mode}} ' \
+            '--active-grid-data "{{self.active_grid_data}}"' \
             '--output-format {{self.output_format}} ' \
             '--output-file model_vis.{{self.output_format}}'
 
