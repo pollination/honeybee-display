@@ -127,7 +127,7 @@ class ModelToVis(Function):
             '--grid-display-mode {{self.grid_display_mode}} ' \
             '--{{self.grid_visibility}}-grid --grid-data input_data ' \
             '--grid-data-display-mode {{self.grid_data_display_mode}} ' \
-            '--active-grid-data "{{self.active_grid_data}}"' \
+            '--active-grid-data "{{self.active_grid_data}}" ' \
             '--output-format {{self.output_format}} ' \
             '--output-file model_vis.{{self.output_format}}'
 
