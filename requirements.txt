@@ -1,2 +1,2 @@
 pollination-dsl==0.15.3
-honeybee-display[full]==0.3.3
+honeybee-display[full]==0.3.4
