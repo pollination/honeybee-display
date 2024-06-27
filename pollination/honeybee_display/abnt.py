@@ -40,9 +40,14 @@ class AbntNbr15575DaylightVis(Function):
     )
 
     center_points = Inputs.file(
-        description='A JSON file with 3D points to be visualized. These will be '
-        'displayed as DisplayPoint3D.',
+        description='A JSON file with Ladybug Point3D objects to be visualized. '
+        'These will be displayed as DisplaySphere.',
         path='center_points.json', optional=True)
+    
+    point_radius = Inputs.float(
+        description='Radius of the spheres at the center points.',
+        default=0.05, spec={'type': 'number', 'minimum': 0.01}
+    )
 
     output_format = Inputs.str(
         description='Text for the output format of the resulting VisualizationSet '

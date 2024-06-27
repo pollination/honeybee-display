@@ -7,9 +7,9 @@ if __name__ == '__main__':
     import uuid
 
     from honeybee.model import Model
-    from ladybug_geometry.geometry3d import Point3D
+    from ladybug_geometry.geometry3d import Point3D, Sphere
     from ladybug.color import Color
-    from ladybug_display.visualization import ContextGeometry, DisplayPoint3D
+    from ladybug_display.visualization import ContextGeometry, DisplaySphere
 
     # inputs
     hb_model = Model.from_hbjson('model.hbjson')
@@ -17,6 +17,7 @@ if __name__ == '__main__':
     active_grid_data = '{{self.active_grid_data}}'
     center_points_file = Path('center_points.json')
     output_format = '{{self.output_format}}'
+    point_radius = {{self.point_radius}}
 
     # create base vis set
     vis_set = hb_model.to_vis_set(
@@ -30,8 +31,8 @@ if __name__ == '__main__':
             center_points = json.load(f)
         for cp in center_points:
             lb_point3d = Point3D.from_dict(cp)
-            display_point3d = DisplayPoint3D(geometry=lb_point3d, color=Color(0, 0, 0))
-            geo_objs.append(display_point3d)
+            display_sphere = DisplaySphere(Sphere(lb_point3d, point_radius), color=Color(0, 0, 0))
+            geo_objs.append(display_sphere)
         cg = ContextGeometry('center-points', geo_objs)
         cg.display_name = 'Center Points'
         vis_set.add_geometry(cg)
